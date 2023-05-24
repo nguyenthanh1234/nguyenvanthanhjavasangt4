@@ -3,9 +3,11 @@ package com.example.nguyenvanthanh.controller;
 import com.example.nguyenvanthanh.entity.Book;
 import com.example.nguyenvanthanh.services.BookService;
 import com.example.nguyenvanthanh.services.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Iterator;
@@ -34,7 +36,12 @@ public class BookController {
     }
 
     @PostMapping("/add")
-    public String addBook(@ModelAttribute("book") Book book){
+    public String addBook(@Valid @ModelAttribute("book") Book book, BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()){
+
+            model.addAttribute("categories",categoryService.getAllCategories());
+            return "book/add";
+        }
         bookService.addBook(book);
         return "redirect:/books";
     }
@@ -58,7 +65,12 @@ public class BookController {
     }
 
     @PostMapping("/edit")
-    public String editBook(@ModelAttribute("book") Book updatedBook){
+    public String editBook(@Valid @ModelAttribute("book") Book updatedBook, BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()){
+
+            model.addAttribute("categories",categoryService.getAllCategories());
+            return "book/edit";
+        }
         for(int i = 0; i<bookService.getAllBooks().size();i++){
             Book book = bookService.getAllBooks().get(i);
             if(book.getId() == updatedBook.getId()){

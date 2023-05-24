@@ -1,6 +1,7 @@
 package com.example.nguyenvanthanh.services;
 
 
+import com.example.nguyenvanthanh.entity.Book;
 import com.example.nguyenvanthanh.entity.Category;
 import com.example.nguyenvanthanh.repository.ICategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,13 @@ public class CategoryService {
     public Category saveCategory(Category category){
         return categoryRepository.save(category);
     }
+//    public void addCategory(Category category){
+//        categoryRepository.save(category);
+//    }
+//
+//    public void updateBook(Book book){
+//        bookRepository.save(book);
+//    }
     public void deleteCategory(Long id){
         categoryRepository.deleteById(id);
     }

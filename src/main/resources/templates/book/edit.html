@@ -29,12 +29,22 @@
             <input class="form-control" type="text" th:field="*{price}" id="price">
             <span class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
         </div>
+<!--        <div class="col-6 mb-3">-->
+<!--            <label class="form-label" for="category" >Category: </label>-->
+<!--            <select class="form-control" id="category" name="category.id">-->
+<!--                <option th:value="*{category.id}">&#45;&#45; Select Category &#45;&#45;</option>-->
+<!--                <option th:each="category : ${categories}" th:value="${category.id}"-->
+<!--                        th:text="${category.name}"></option>-->
+<!--            </select>-->
+<!--        </div>-->
         <div class="col-6 mb-3">
-            <label class="form-label" for="category" >Category: </label>
-            <select class="form-control" id="category" name="category.id">
-                <option th:value="*{category.id}">-- Select Category --</option>
-                <option th:each="category : ${categories}" th:value="${category.id}"
-                        th:text="${category.name}"></option>
+            <label class="form-label" for="category">Category:</label>
+            <select class="form-control" name="category.id" id="category">
+                <option th:each="category : ${categories}"
+                        th:value="${category.id}"
+                        th:text="${category.name}"
+                        th:selected="${category.id == book.category.id}">
+                </option>
             </select>
         </div>
         <input type="submit" class="btn btn-primary" value="Save">

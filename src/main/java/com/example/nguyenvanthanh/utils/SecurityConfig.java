@@ -40,12 +40,12 @@ public class SecurityConfig {
                                 "/error")
                         .permitAll()
                         .requestMatchers( "/books/edit", "/books/delete")
-                        .authenticated()
+                        .hasAnyAuthority("ADMIN")
 
+//                                .authenticated()
                         .requestMatchers("/books", "/books/add")
-
-                        .authenticated()
-
+                        .hasAnyAuthority("ADMIN","USER")
+//                                .authenticated()
                         .anyRequest().authenticated()
 
                 )
